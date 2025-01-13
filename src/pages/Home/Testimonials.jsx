@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../components/SectionTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "@smastrom/react-rating/style.css";
 
 // Import Swiper styles
 import "swiper/css";
@@ -8,6 +9,8 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper/modules";
+import { Rating } from "@smastrom/react-rating";
+import { FaQuoteLeft } from "react-icons/fa";
 
 const Testimonials = () => {
   const [testi, setTesti] = useState([]);
@@ -32,9 +35,11 @@ const Testimonials = () => {
           const {name, details, rating} = test;
           return (
             <SwiperSlide key={test._id}>
-              <div className="text-center px-32">
-                <p>{details}</p>
-                <h1 className="text-3xl text-orange-500">{name}</h1>
+              <div className="text-center flex flex-col justify-center items-center gap-3">
+                <Rating style={{ maxWidth: 180 }} value={rating} readOnly />
+                <FaQuoteLeft className="text-7xl" />
+                <p className="text-lg w-[70%]">{details}</p>
+                <h1 className="text-3xl text-orange-400">{name}</h1>
               </div>
             </SwiperSlide>
           );

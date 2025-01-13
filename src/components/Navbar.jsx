@@ -1,29 +1,23 @@
+import { Link, NavLink, useLocation } from "react-router-dom";
+
 const Navbar = () => {
+  const location = useLocation();
   const navLinks = (
     <>
       <li>
-        <a>Item 1</a>
+        <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li>
-              <a>Submenu 1</a>
-            </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <a>Item 3</a>
+        <NavLink to={"/menu"}>Our Menu</NavLink>
       </li>
     </>
   );
   return (
-    <div className="navbar fixed z-10 bg-inherit glass">
+    <div
+      className={`navbar ${
+        location.pathname === "/" ? "fixed" : ""
+      }  z-10 bg-inherit glass`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -49,12 +43,13 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">BistroBoss</a>
+        <Link to={"/"} className="btn btn-ghost text-xl flex items-center">
+          <img src="/logo.png" className="max-h-6" alt="" />
+          <h1>BistroBoss</h1>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navLinks}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>
