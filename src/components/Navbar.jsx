@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div
       className={`navbar ${
-        location.pathname === "/" ? "fixed" : ""
+        location.pathname === "/" ? "fixed" : "fixed"
       }  z-10 bg-inherit glass`}
     >
       <div className="navbar-start">

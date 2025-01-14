@@ -1,18 +1,10 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../components/SectionTitle";
 import MenuCard from "../../components/MenuCard";
+import useMenu from "../../hooks/useMenu";
 
 const Menu = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    fetch("/menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const popular = data.filter(foo => foo.category === "popular")
-        setMenu(popular);
-      });
-  }, []);
+  const [menu] = useMenu();
+  const popular = menu.filter((foo) => foo.category === "popular");
   return (
     <section className="max-w-7xl mx-auto mb-10 flex flex-col justify-center gap-3">
       <SectionTitle
@@ -20,7 +12,7 @@ const Menu = () => {
         title="from our menu"
       ></SectionTitle>
       <div className="grid grid-cols-2 gap-6">
-        {menu.map((food) => (
+        {popular.map((food) => (
           <MenuCard key={food._id} food={food}></MenuCard>
         ))}
       </div>
