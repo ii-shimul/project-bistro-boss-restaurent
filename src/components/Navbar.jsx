@@ -10,13 +10,14 @@ const Navbar = () => {
       <li>
         <NavLink to={"/menu"}>Our Menu</NavLink>
       </li>
+      <li>
+        <NavLink to={"/order/salad"}>Order Food</NavLink>
+      </li>
     </>
   );
   return (
     <div
-      className={`navbar ${
-        location.pathname === "/" ? "fixed" : "fixed"
-      }  z-10 bg-inherit glass`}
+      className={`navbar z-[100] fixed bg-black bg-opacity-30 text-white`}
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -45,14 +46,14 @@ const Navbar = () => {
         </div>
         <Link to={"/"} className="btn btn-ghost text-xl flex items-center">
           <img src="/logo.png" className="max-h-6" alt="" />
-          <h1>BistroBoss</h1>
+          <h1 className="font-serif">BistroBoss</h1>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <Link to={"/login"} className="btn">Login</Link>
       </div>
     </div>
   );
