@@ -1,7 +1,10 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
-
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; 
 const Navbar = () => {
-  const location = useLocation();
+  const { user, logOut } = useContext(AuthContext);
   const navLinks = (
     <>
       <li>
@@ -16,9 +19,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div
-      className={`navbar z-[100] fixed bg-black bg-opacity-30 text-white`}
-    >
+    <div className={`navbar z-[100] fixed bg-black bg-opacity-30 text-white`}>
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -53,7 +54,24 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <Link to={"/login"} className="btn">Login</Link>
+        {user?.email ? (
+          <>
+            <Tippy content={user.displayName}>
+              <div className="avatar online">
+                <div className="h-12 rounded-full">
+                  <img src={user.photoURL} />
+                </div>
+              </div>
+            </Tippy>
+            <button className="btn bg-[#fb8e01] ml-2" onClick={logOut}>
+              LogOut
+            </button>
+          </>
+        ) : (
+          <Link to={"/login"} className="btn bg-[#fb8e01]">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

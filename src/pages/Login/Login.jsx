@@ -8,11 +8,15 @@ import {
 } from "react-simple-captcha";
 import { Space } from "lucide-react";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext);
+  const nav = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const captchaRef = useRef(null);
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -27,10 +31,11 @@ const Login = () => {
     const password = e.target.password.value;
     logIn(email, password)
       .then((res) => {
-        const user = res.user;
-        console.log(user);
+        toast.success("Logged in successfully!");
+        nav(from, {replace: true});
       })
       .catch((err) => {
+        toast.error(err.message);
         console.log(err);
       });
   };

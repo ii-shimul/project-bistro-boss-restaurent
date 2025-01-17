@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -8,6 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 
@@ -38,11 +40,12 @@ const AuthProvider = ({ children }) => {
 
   const logIn = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const logOut = () => {
     setLoading(true);
+    toast.success("Logged in successfully!");
     return signOut(auth);
   };
 
@@ -66,6 +69,10 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthProvider;

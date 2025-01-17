@@ -3,12 +3,14 @@ import signupBg from "/src/assets/others/authentication.png";
 import signupArt from "/src/assets/others/authentication2.png";
 import { Image } from "lucide-react";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const { createUser } = useContext(AuthContext);
+  const nav = useNavigate()
   const {
     register,
     handleSubmit,
@@ -18,6 +20,8 @@ const Signup = () => {
   const onSubmit = (data) => {
     const { email, password, name, photoURL } = data;
     createUser(email, password, name, photoURL);
+    toast.success("Account created successfully!");
+    nav("/");
   };
 
   return (
