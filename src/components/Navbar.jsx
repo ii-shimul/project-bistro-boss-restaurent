@@ -2,9 +2,13 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css"; 
+import "tippy.js/dist/tippy.css";
+import { FiShoppingCart } from "react-icons/fi";
+import { Badge } from "@mui/material";
+import useCart from "../hooks/useCart";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const navLinks = (
     <>
       <li>
@@ -56,6 +60,13 @@ const Navbar = () => {
       <div className="navbar-end">
         {user?.email ? (
           <>
+            <Badge
+              color="primary"
+              badgeContent={cart.length}
+              className="mr-5 text-2xl cursor-pointer"
+            >
+              <FiShoppingCart />
+            </Badge>
             <Tippy content={user.displayName}>
               <div className="avatar online">
                 <div className="h-12 rounded-full">
