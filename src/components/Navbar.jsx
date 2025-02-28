@@ -12,13 +12,19 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink to={"/"} viewTransition>
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/menu"}>Our Menu</NavLink>
+        <NavLink to={"/menu"} viewTransition>
+          Our Menu
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/order/salad"}>Order Food</NavLink>
+        <NavLink to={"/order/salad"} viewTransition>
+          Order Food
+        </NavLink>
       </li>
     </>
   );
@@ -60,13 +66,15 @@ const Navbar = () => {
       <div className="navbar-end">
         {user?.email ? (
           <>
-            <Badge
-              color="primary"
-              badgeContent={cart.length}
-              className="mr-5 text-2xl cursor-pointer"
-            >
-              <FiShoppingCart />
-            </Badge>
+            <Link to={"/dashboard/cart"}>
+              <Badge
+                color="primary"
+                badgeContent={cart.length}
+                className="mr-5 text-2xl cursor-pointer"
+              >
+                <FiShoppingCart />
+              </Badge>
+            </Link>
             <Tippy content={user.displayName}>
               <div className="avatar online">
                 <div className="h-12 rounded-full">

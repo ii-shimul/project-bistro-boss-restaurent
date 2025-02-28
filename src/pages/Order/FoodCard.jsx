@@ -6,7 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 
 const FoodCard = ({ item }) => {
-  const [,refetch] = useCart();
+  const [, refetch] = useCart();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const nav = useNavigate();
@@ -14,8 +14,11 @@ const FoodCard = ({ item }) => {
   const handleAddToCart = (food) => {
     if (user && user.email) {
       const cartItem = {
-        foodId: food._id,
         userEmail: user.email,
+        id: food._id,
+        img: food.image,
+        name: food.name,
+        price: food.price
       };
       axiosSecure.post("/cart", cartItem).then((res) => {
         if (res.data.insertedId) {

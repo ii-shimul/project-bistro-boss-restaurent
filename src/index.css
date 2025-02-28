@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active{
+  color: #fff;
+  text-decoration: underline;
+  /* text-decoration-color: white; */
+  font-size: 1rem;
+  transition: all ease-in-out 0.4s;
+}
